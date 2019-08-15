@@ -6,18 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.Array;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private boolean play = false;
 
     private String textblock = "...he's the hero Gotham deserves, but not the one it needs right now. So, we'll hunt him, because he can take it. Because he's not our hero. He's a silent guardian. A watchful protector. A Dark Knight.";
     private int wordstyped = 0;
+    private String lettersTyped = "";
 
     private Timer timer;
     private int delay = 2;
 
-    JTextField jt = new JTextField(30);
-    jt.setBounds(100,height - 150,150,50);
     private TextBlockGenerator text = new TextBlockGenerator(textblock);
 
     public Gameplay(){
@@ -40,18 +40,31 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         //text block
         text.draw(g);
 
+        //letters being typed
+        g.setFont(new Font("sans serif", Font.BOLD, 25));
+        g.drawString(lettersTyped, 10, 500);
+
+        g.dispose();
+
     }
 
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        timer.start();
+        repaint();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("key hit");
+        System.out.println(e.getKeyChar());
+        lettersTyped += e.getKeyChar();
+
+
+        if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && lettersTyped.length() != 0){
+            lettersTyped = lettersTyped.substring(0, lettersTyped.length() - 1);
+        }
     }
 
 
