@@ -7,13 +7,10 @@ import java.util.Arrays;
 public class TextBlockGenerator {
 
     public String text;
+    int fontSize = 25;
 
     public TextBlockGenerator(String textblock) {
-        //TODO: set font size
 
-        //TODO: set coordinates
-
-        //
         text = textblock;
 
     }
@@ -40,6 +37,7 @@ public class TextBlockGenerator {
         String line = String.join(" ", Arrays.copyOfRange(words, prev, words.length));
         newString += line;
 
+        g.setFont(new Font("sans serif", Font.PLAIN, fontSize));
         drawString(g, newString, xCoord, yCoord, correct, incorrect);
     }
 

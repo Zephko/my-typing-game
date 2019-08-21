@@ -13,20 +13,33 @@ import java.util.Timer;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private boolean play = false;
+    private boolean gameOver = false;
 
     private String textblock = "...he's the hero Gotham deserves, but not the one it needs right now. So, we'll hunt him, because he can take it. Because he's not our hero. He's a silent guardian. A watchful protector. A Dark Knight.";
     private int lettersCorrect = 0;
     private int lettersIncorrect = 0;
-    private String lettersTyped = "";
 
     private javax.swing.Timer timer;
+    private String lettersTyped = "";
     private int delay = 2;
 
     int secondsElapsed = 0;
     double millisElapsed = 0;
-    int wpm, cpm;
+    int wpm, cpm, wpm_final, cpm_final, time_final;
 
     private TextBlockGenerator text = new TextBlockGenerator(textblock);
+
+    java.util.Timer secondsTimer = new java.util.Timer();
+    java.util.TimerTask task = new java.util.TimerTask(){
+
+        @Override
+        public void run() {
+            secondsElapsed++;
+          //  System.out.println(secondsElapsed);
+            // System.out.println("wpm" + wpm);
+            //System.out.println("cpm" + cpm);
+        }
+    };
 
     public Gameplay(){
         addKeyListener(this);
@@ -35,27 +48,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         timer = new javax.swing.Timer(delay, this);
         timer.start();
 
-        java.util.Timer secondsTimer = new java.util.Timer();
-        java.util.TimerTask task = new java.util.TimerTask(){
-
-            @Override
-            public void run() {
-                secondsElapsed++;
-                System.out.println(secondsElapsed);
-                System.out.println("wpm" + wpm);
-                System.out.println("cpm" + cpm);
-            }
-        };
-
-        secondsTimer.scheduleAtFixedRate(task, 0, 1000);
-
         java.util.Timer wpmTimer = new java.util.Timer();
         java.util.TimerTask task_wpm = new java.util.TimerTask(){
 
             @Override
             public void run() {
                 millisElapsed++;
-                //wpm = (int) (((double) wordsCorrect / millisElapsed) * 60000);
                 cpm = (int) (((double) lettersCorrect / millisElapsed)* 60000);
                 wpm = (int) (((double) lettersCorrect / millisElapsed)* 60000 / 5);
             }
@@ -79,30 +77,38 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         //TODO: add parameter that tracks how many words correctly typed so far
         if (play) {
+            //game over
+            if (gameOver){
 
-        }
-        //game over
-        if (lettersCorrect == text.getLength()) {
-            g.setColor(Color.red);
-            g.setFont(new Font("sans serif", Font.BOLD, 40));
-            String endMessage = "YOU WON";
-            g.drawString(endMessage, (width - g.getFontMetrics().stringWidth(endMessage)) / 2 , height / 2);
+                g.setColor(Color.red);
+                g.setFont(new Font("sans serif", Font.BOLD, 40));
+                String endMessage = "YOU WON";
+                String stats = "TIME: " + time_final + " WPM: " + wpm_final + " CPM: " + cpm_final;
+                g.drawString(endMessage, (width - g.getFontMetrics().stringWidth(endMessage)) / 2 , height / 2);
+                g.drawString(stats, (width - g.getFontMetrics().stringWidth(stats)) / 2, height / 2 + g.getFontMetrics().getHeight());
 
-        } else {
-            text.draw(g, lettersCorrect,lettersIncorrect);
+            } else {
+                text.draw(g, lettersCorrect,lettersIncorrect);
+                g.setColor(Color.white);
+                g.setFont(new Font("sans serif", Font.BOLD, 30));
+                g.drawString("Time: " + secondsElapsed + "s", width - 200, 100);
+                g.drawString("WPM: " + wpm, width - 200, 100 + g.getFontMetrics().getHeight());
+                g.drawString("CPM: " + cpm, width - 200, 100 + g.getFontMetrics().getHeight() * 2);
+            }
+
+            //letters being typed
             g.setColor(Color.white);
-            g.setFont(new Font("sans serif", Font.BOLD, 30));
-            g.drawString("Time: " + secondsElapsed + "s", width - 150, 100);
-            g.drawString("WPM: " + wpm, width - 150, 100 + g.getFontMetrics().getHeight());
-            g.drawString("CPM: " + cpm, width - 150, 100 + g.getFontMetrics().getHeight() * 2);
+            g.setFont(new Font("sans serif", Font.BOLD, 25));
+            g.drawString(lettersTyped, 10, 500);
+
+            g.dispose();
         }
 
-        //letters being typed
-        g.setColor(Color.white);
-        g.setFont(new Font("sans serif", Font.BOLD, 25));
-        g.drawString(lettersTyped, 10, 500);
-
-        g.dispose();
+        //menu screen
+        g.setFont(new Font("sans serif", Font.BOLD, 40));
+        g.setColor(Color.green);
+        String startMessage = "PRESS ENTER TO START";
+        g.drawString(startMessage, (width - g.getFontMetrics().stringWidth(startMessage)) / 2, height / 2);
 
     }
 
@@ -111,7 +117,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
-        play = true;
+        //play = true;
         repaint();
     }
 
@@ -119,14 +125,21 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
         //TODO: create end sequence when all characters typed
 
+        System.out.println("BEFORE\n " + "letters correct: " + lettersCorrect + "\nletters incorrect: " + lettersIncorrect);
+
         if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
         //2 branches here: one if correct letter backspaced, one if incorrect letter backspaced
             if (lettersTyped.length() == 0) {
             } else {
+                System.out.println(lettersTyped.charAt(lettersTyped.length() - 1));
+                System.out.println(text.getChar(lettersCorrect - 1));
+
                 if (lettersTyped.charAt(lettersTyped.length() - 1) == ' ') {
                     lettersIncorrect--;
-                } else if (lettersTyped.charAt(lettersTyped.length() - 1) == text.getChar(lettersCorrect - 1)) {
-                    System.out.println("correct char backspaces");
+                } else if(lettersIncorrect != 0){
+                    lettersIncorrect--;
+                } else if (lettersTyped.charAt(lettersTyped.length() - 1) == text.getChar(lettersCorrect + lettersIncorrect - 1)) {
+                    System.out.println("correct char backspaced");
                     lettersCorrect--;
                 } else {
                     lettersIncorrect--;
@@ -135,6 +148,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 lettersTyped = lettersTyped.substring(0, lettersTyped.length() - 1);
                 System.out.println(lettersTyped);
             }
+        }
+
+        //TODO: Add start countdown sequence while showing textblock
+        else if (e.getKeyCode() == KeyEvent.VK_ENTER){
+            play = true;
+            secondsTimer.scheduleAtFixedRate(task, 0, 1000);
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -163,6 +182,16 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 lettersIncorrect++;
             }
         }
+
+        //check for game over
+        if (lettersCorrect == text.getLength()) {
+            time_final = secondsElapsed;
+            wpm_final = wpm;
+            cpm_final = cpm;
+            gameOver = true;
+            lettersCorrect = 0;
+        }
+        System.out.println("AFTER\n " + "letters correct: " + lettersCorrect + "\nletters incorrect: " + lettersIncorrect + "\n ---------------------\n");
     }
 
 
@@ -173,7 +202,4 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
     }
-
-
-
 }
