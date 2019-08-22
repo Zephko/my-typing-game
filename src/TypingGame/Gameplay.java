@@ -1,11 +1,17 @@
 package TypingGame;
 
+import javafx.scene.transform.Scale;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.TimerTask;
@@ -21,7 +27,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     String[] quotes = {"...he's the hero Gotham deserves, but not the one it needs right now. So, we'll hunt him, because he can take it. Because he's not our hero. He's a silent guardian. A watchful protector. A Dark Knight.",
     "People need dramatic examples to shake them out of apathy, and I can't do that as Bruce Wayne. As a man, I'm flesh and blood; I can be ignored, I can be destroyed. But as a symbol... as a symbol I can be incorruptible. I can be everlasting.",
             "A hero can be anyone. Even a man doing something as simple and reassuring as putting a coat around a young boy's shoulders to let him know that the world hadn't ended.",
-            "Don't talk like one of them, you're not! Even if you'd like to be. To them, you're just a freak, like me! They need you right now, but when they don't, they'll cast you out, like a leper. You see, their morals, their code, it's a bad joke. Dropped at the first sign of trouble. They're only as good as the world allows them to be. I'll show you. When the chips are down, these... these civilized people, they'll eat each other. See, I'm not a monster. I'm just ahead of the curve."};
+            "Yeah, I mean, just gotta play our game out there and keep it simple. Can't take these guys lightly, gotta play a full 60. Get pucks to the net with bodies in front. Good group o' guys in here gettin' pucks in deep, sacrificing the body. Need to come out with 2 points.",
+    };
 
     private int lettersCorrect = 0;
     private int lettersIncorrect = 0;
@@ -35,6 +42,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     int wpm, cpm, wpm_final, cpm_final, time_final;
 
     TextBlockGenerator text = new TextBlockGenerator(quotes[0]);
+    private BufferedImage img = null;
+    private Image scaledImage;
+    private BufferedImage finishImg = null;
+    private Image scaledFinishImg;
 
     java.util.Timer secondsTimer = new java.util.Timer();
     java.util.TimerTask task = new java.util.TimerTask(){
@@ -67,6 +78,16 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         timer = new javax.swing.Timer(delay, this);
         timer.start();
         System.out.println("gameplay initialized");
+
+        //read in car image
+        try {
+            img = ImageIO.read(new File("C:/TypingGame/src/TypingGame/car.png"));
+            finishImg = ImageIO.read(new File("C:/TypingGame/src/TypingGame/finish3.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        scaledImage = img.getScaledInstance(90, 36,Image.SCALE_DEFAULT);
+        scaledFinishImg = finishImg.getScaledInstance(64, 64, Image.SCALE_DEFAULT);
 
     }
 
@@ -102,6 +123,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 g.setColor(Color.white);
                 g.setFont(new Font("sans serif", Font.BOLD, 25));
                 g.drawString(lettersTyped, 10, 500);
+
+                //car
+                int interval = (width - 275) / text.getLength();
+                g.drawImage(scaledImage, 100 + interval * lettersCorrect, 400, this);
+                g.drawImage(scaledFinishImg, width - 200, 400, this);
             }
             g.dispose();
         }
