@@ -41,11 +41,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     double millisElapsed = 0;
     int wpm, cpm, wpm_final, cpm_final, time_final;
 
-    TextBlockGenerator text = new TextBlockGenerator(quotes[0]);
-    private BufferedImage img = null;
-    private Image scaledImage;
-    private BufferedImage finishImg = null;
-    private Image scaledFinishImg;
+    private TextBlockGenerator text = new TextBlockGenerator(quotes[0]);
+    private Car car = new Car(100, text.getLength());
+    private ScreenElements screen = new ScreenElements();
 
     java.util.Timer secondsTimer = new java.util.Timer();
     java.util.TimerTask task = new java.util.TimerTask(){
@@ -53,9 +51,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         @Override
         public void run() {
             secondsElapsed++;
-          //  System.out.println(secondsElapsed);
-            // System.out.println("wpm" + wpm);
-            //System.out.println("cpm" + cpm);
         }
     };
 
@@ -79,64 +74,29 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         timer.start();
         System.out.println("gameplay initialized");
 
-        //read in car image
-        try {
-            img = ImageIO.read(new File("C:/TypingGame/src/TypingGame/car.png"));
-            finishImg = ImageIO.read(new File("C:/TypingGame/src/TypingGame/finish3.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        scaledImage = img.getScaledInstance(90, 36,Image.SCALE_DEFAULT);
-        scaledFinishImg = finishImg.getScaledInstance(64, 64, Image.SCALE_DEFAULT);
-
     }
 
     public void paint(Graphics g) {
         requestFocus();
-        //background
-        g.setColor(Color.black);
-        int width = Main.width;
-        int height = Main.height;
-        g.fillRect(1, 1, width, height);
+        screen.printBackground(g);
 
         if (play) {
 
-            //game over
             if (gameOver){
+                screen.gameOver(g, time_final, wpm_final, cpm_final);
 
-                g.setColor(Color.red);
-                g.setFont(new Font("sans serif", Font.BOLD, 40));
-                String endMessage = "YOU WON. Press Enter for next.";
-                String stats = "TIME: " + time_final + " WPM: " + wpm_final + " CPM: " + cpm_final;
-                g.drawString(endMessage, (width - g.getFontMetrics().stringWidth(endMessage)) / 2 , height / 2);
-                g.drawString(stats, (width - g.getFontMetrics().stringWidth(stats)) / 2, height / 2 + g.getFontMetrics().getHeight());
 
             } else {
                 text.draw(g, lettersCorrect,lettersIncorrect);
-                g.setColor(Color.white);
-                g.setFont(new Font("sans serif", Font.BOLD, 30));
-                g.drawString("Time: " + secondsElapsed + "s", width - 200, 100);
-                g.drawString("WPM: " + wpm, width - 200, 100 + g.getFontMetrics().getHeight());
-                g.drawString("CPM: " + cpm, width - 200, 100 + g.getFontMetrics().getHeight() * 2);
+                screen.printStats(g, secondsElapsed, wpm, cpm);
+                screen.printTypedLetters(g, lettersTyped);
+                car.moveCar(g, lettersCorrect);
 
-                //letters being typed
-                g.setColor(Color.white);
-                g.setFont(new Font("sans serif", Font.BOLD, 25));
-                g.drawString(lettersTyped, 10, 500);
-
-                //car
-                int interval = (width - 275) / text.getLength();
-                g.drawImage(scaledImage, 100 + interval * lettersCorrect, 400, this);
-                g.drawImage(scaledFinishImg, width - 200, 400, this);
             }
             g.dispose();
         }
 
-        //menu screen
-        g.setFont(new Font("sans serif", Font.BOLD, 40));
-        g.setColor(Color.green);
-        String startMessage = "PRESS ENTER TO START";
-        g.drawString(startMessage, (width - g.getFontMetrics().stringWidth(startMessage)) / 2, height / 2);
+        screen.printMenu(g);
 
     }
 
@@ -187,12 +147,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 level++;
                 lettersTyped = "";
                 text = new TextBlockGenerator(quotes[level]);
+                car = new Car(100, text.getLength());
 
             }
             play = true;
             newGame = true;
-            secondsTimer.scheduleAtFixedRate(task, 5000, 1000);
-            wpmTimer.scheduleAtFixedRate(task_wpm, 5000, 1);
+            secondsTimer.scheduleAtFixedRate(task, 0, 1000);
+            wpmTimer.scheduleAtFixedRate(task_wpm, 0, 1);
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -208,6 +169,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_CAPS_LOCK || e.getKeyCode() == KeyEvent.VK_SHIFT){
+            //no input, skip
         }
 
         else {
@@ -230,7 +192,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             gameOver = true;
             lettersCorrect = 0;
         }
-        System.out.println("AFTER\n " + "letters correct: " + lettersCorrect + "\nletters incorrect: " + lettersIncorrect + "\n ---------------------\n");
     }
 
 
