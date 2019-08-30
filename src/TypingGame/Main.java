@@ -2,13 +2,14 @@ package TypingGame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class Main {
 
     static int width;
     static int height;
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException {
         JFrame obj = new JFrame();
         Gameplay gamePlay = new Gameplay();
 

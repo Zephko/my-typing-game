@@ -4,6 +4,7 @@ import javafx.scene.transform.Scale;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,11 +12,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.Date;
-import java.util.TimerTask;
-import java.util.Timer;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
@@ -24,11 +24,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private boolean newGame = true;
     private int level = 0;
 
-    private String[] quotes = {"...he's the hero Gotham deserves, but not the one it needs right now. So, we'll hunt him, because he can take it. Because he's not our hero. He's a silent guardian. A watchful protector. A Dark Knight.",
-            "People need dramatic examples to shake them out of apathy, and I can't do that as Bruce Wayne. As a man, I'm flesh and blood; I can be ignored, I can be destroyed. But as a symbol... as a symbol I can be incorruptible. I can be everlasting.",
-            "A hero can be anyone. Even a man doing something as simple and reassuring as putting a coat around a young boy's shoulders to let him know that the world hadn't ended.",
-            "Yeah, I mean, just gotta play our game out there and keep it simple. Can't take these guys lightly, gotta play a full 60. Get pucks to the net with bodies in front. Good group o' guys in here gettin' pucks in deep, sacrificing the body. Need to come out with 2 points.",
-    };
+//    private String[] quotes = {"...he's the hero Gotham deserves, but not the one it needs right now. So, we'll hunt him, because he can take it. Because he's not our hero. He's a silent guardian. A watchful protector. A Dark Knight.",
+//            "People need dramatic examples to shake them out of apathy, and I can't do that as Bruce Wayne. As a man, I'm flesh and blood; I can be ignored, I can be destroyed. But as a symbol... as a symbol I can be incorruptible. I can be everlasting.",
+//            "A hero can be anyone. Even a man doing something as simple and reassuring as putting a coat around a young boy's shoulders to let him know that the world hadn't ended.",
+//            "Yeah, I mean, just gotta play our game out there and keep it simple. Can't take these guys lightly, gotta play a full 60. Get pucks to the net with bodies in front. Good group o' guys in here gettin' pucks in deep, sacrificing the body. Need to come out with 2 points.",
+//    };
+
+    private Quotes quotes;
 
     private int lettersCorrect = 0;
     private int lettersIncorrect = 0;
@@ -41,8 +43,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private double millisElapsed = 0;
     private int wpm, cpm, wpm_final, cpm_final, time_final;
 
-    private TextBlockGenerator text = new TextBlockGenerator(quotes[0]);
-    private Car car = new Car(100, text.getLength());
+    private TextBlockGenerator text;
+    private Car car;
     private ScreenElements screen = new ScreenElements();
 
     private java.util.Timer secondsTimer = new java.util.Timer();
@@ -65,13 +67,17 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     };
 
 
-    public Gameplay() {
+    public Gameplay() throws FileNotFoundException{
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         timer = new javax.swing.Timer(delay, this);
         timer.start();
         System.out.println("Gameplay initialized");
+
+        quotes = new Quotes();
+        text = new TextBlockGenerator(quotes.next());
+        car = new Car(100, text.getLength());
 
     }
 
@@ -166,7 +172,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             millisElapsed = 0;
             level++;
             lettersTyped = "";
-            text = new TextBlockGenerator(quotes[level]);
+            text = new TextBlockGenerator(quotes.next());
             car = new Car(100, text.getLength());
 
         }
