@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="14b544ad-3fcb-4dc6-854e-35ea6f87ca23" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TypingGame/Quotes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/typingGame/TypingGame/Gameplay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/typingGame/TypingGame/Gameplay$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/typingGame/TypingGame/Gameplay$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/typingGame/TypingGame/Gameplay$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/typingGame/TypingGame/Gameplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/typingGame/TypingGame/Gameplay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/typingGame/TypingGame/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/typingGame/TypingGame/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TypingGame/Gameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TypingGame/Gameplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TypingGame/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TypingGame/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="14b544ad-3fcb-4dc6-854e-35ea6f87ca23" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,60 +14,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TypingGame/Gameplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="78" column="45" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
+            <state relative-caret-position="184">
+              <caret line="70" column="31" lean-forward="true" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#5529#5668#0" expanded="true" />
+                <element signature="e#5667#5668#0" expanded="true" />
+                <element signature="e#5757#6062#0" expanded="true" />
+                <element signature="e#6061#6062#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TypingGame/Quotes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="29" column="30" lean-forward="true" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+            <state relative-caret-position="263">
+              <caret line="46" column="41" lean-forward="true" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#693#694#0" expanded="true" />
                 <element signature="e#722#723#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/../Program Files/Java/jdk1.8.0_221/src.zip!/java/util/ArrayList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="656" column="18" selection-start-line="656" selection-start-column="18" selection-end-line="656" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TypingGame/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TypingGame/TextBlockGenerator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="105" column="20" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -112,15 +74,17 @@
         <option value="$PROJECT_DIR$/src/TypingGame/Car.java" />
         <option value="$PROJECT_DIR$/src/TypingGame/ScreenElements.java" />
         <option value="$PROJECT_DIR$/src/TypingGame/Main.java" />
-        <option value="$PROJECT_DIR$/src/TypingGame/Gameplay.java" />
         <option value="$PROJECT_DIR$/src/TypingGame/Quotes.java" />
+        <option value="$PROJECT_DIR$/src/TypingGame/Gameplay.java" />
+        <option value="$PROJECT_DIR$/src/TypingGame/quotes.txt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="949" />
-    <option name="width" value="980" />
-    <option name="height" value="1031" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-1287" />
+    <option name="y" value="118" />
+    <option name="width" value="1294" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -215,7 +179,21 @@
       <option name="project" value="LOCAL" />
       <updated>1567132625716</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Quotes class added, successfully scrambling and reading from txt file, timer and wpm appears to have problems">
+      <created>1567135490260</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1567135490260</updated>
+    </task>
+    <task id="LOCAL-00003" summary="IllegalStateException Error fixed, quotes now being taken from API daily">
+      <created>1567230986543</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1567230986543</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -228,10 +206,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1287" y="118" width="1294" height="1047" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28582996" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28606158" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24939272" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -240,14 +217,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291367" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.7815275" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.39934355" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39786857" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32822758" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32932165" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3179396" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.31728664" />
       <window_info anchor="bottom" id="TMC Test Results" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -263,7 +240,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="placed all key functionalities in methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="placed all key functionalities in methods" />
+    <MESSAGE value="Quotes class added, successfully scrambling and reading from txt file, timer and wpm appears to have problems" />
+    <MESSAGE value="IllegalStateException Error fixed, quotes now being taken from API daily" />
+    <option name="LAST_COMMIT_MESSAGE" value="IllegalStateException Error fixed, quotes now being taken from API daily" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$PROJECT_DIR$/../Program Files/Java/jdk1.8.0_221/src.zip!/javax/swing/RepaintManager.java">
@@ -320,17 +299,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/../Program Files/Java/jdk1.8.0_221/src.zip!/java/util/ArrayList.java">
+    <entry file="jar://$PROJECT_DIR$/../Program Files/Java/jdk1.8.0_221/src.zip!/java/util/Timer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="656" column="18" selection-start-line="656" selection-start-column="18" selection-end-line="656" selection-end-column="18" />
+        <state relative-caret-position="96">
+          <caret line="400" column="26" selection-start-line="400" selection-start-column="26" selection-end-line="400" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TypingGame/quotes.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="128" selection-start-line="4" selection-start-column="127" selection-end-line="4" selection-end-column="128" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TypingGame/TextBlockGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="105" column="20" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="20" />
+        <state relative-caret-position="476">
+          <caret line="28" column="31" lean-forward="true" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -339,7 +325,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TypingGame/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
+        <state relative-caret-position="93">
           <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -347,24 +333,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TypingGame/Gameplay.java">
+    <entry file="jar://$PROJECT_DIR$/../Program Files/Java/jdk1.8.0_221/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
-          <caret line="78" column="45" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="656" column="18" selection-start-line="656" selection-start-column="18" selection-end-line="656" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TypingGame/Quotes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="29" column="30" lean-forward="true" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+        <state relative-caret-position="263">
+          <caret line="46" column="41" lean-forward="true" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#693#694#0" expanded="true" />
             <element signature="e#722#723#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TypingGame/Gameplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="70" column="31" lean-forward="true" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5529#5668#0" expanded="true" />
+            <element signature="e#5667#5668#0" expanded="true" />
+            <element signature="e#5757#6062#0" expanded="true" />
+            <element signature="e#6061#6062#0" expanded="true" />
           </folding>
         </state>
       </provider>
