@@ -1,83 +1,59 @@
 package TypingGame;
 
-import javafx.scene.transform.Scale;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.TimerTask;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
-    private boolean play = false;
-    private boolean gameOver = false;
-    private boolean newGame = true;
-    private int level = 0;
-
-//    private String[] quotes = {"...he's the hero Gotham deserves, but not the one it needs right now. So, we'll hunt him, because he can take it. Because he's not our hero. He's a silent guardian. A watchful protector. A Dark Knight.",
-//            "People need dramatic examples to shake them out of apathy, and I can't do that as Bruce Wayne. As a man, I'm flesh and blood; I can be ignored, I can be destroyed. But as a symbol... as a symbol I can be incorruptible. I can be everlasting.",
-//            "A hero can be anyone. Even a man doing something as simple and reassuring as putting a coat around a young boy's shoulders to let him know that the world hadn't ended.",
-//            "Yeah, I mean, just gotta play our game out there and keep it simple. Can't take these guys lightly, gotta play a full 60. Get pucks to the net with bodies in front. Good group o' guys in here gettin' pucks in deep, sacrificing the body. Need to come out with 2 points.",
-//    };
+    private boolean play;
+    private boolean gameOver;
 
     private Quotes quotes;
 
-    private int lettersCorrect = 0;
-    private int lettersIncorrect = 0;
+    private int lettersCorrect;
+    private int lettersIncorrect;
+    private String lettersTyped;
 
     private javax.swing.Timer timer;
-    private String lettersTyped = "";
-    private int delay = 2;
+    private int delay;
 
-    private int secondsElapsed = 0;
-    private double millisElapsed = 0;
+    private int secondsElapsed;
+    private double millisElapsed;
     private int wpm, cpm, wpm_final, cpm_final, time_final;
 
     private TextBlockGenerator text;
     private Car car;
     private ScreenElements screen = new ScreenElements();
 
-    private java.util.Timer secondsTimer = new java.util.Timer();
-    private java.util.TimerTask task = new java.util.TimerTask() {
-        @Override
-        public void run() {
-            secondsElapsed++;
-        }
-    };
+    private java.util.Timer secondsTimer;
+    private java.util.TimerTask task;
 
-    private java.util.Timer wpmTimer = new java.util.Timer();
-    private java.util.TimerTask task_wpm = new java.util.TimerTask() {
-
-        @Override
-        public void run() {
-            millisElapsed++;
-            cpm = (int) (((double) lettersCorrect / millisElapsed) * 60000);
-            wpm = (int) (((double) lettersCorrect / millisElapsed) * 60000 / 5);
-        }
-    };
+    private java.util.Timer wpmTimer;
+    private java.util.TimerTask task_wpm;
 
 
-    public Gameplay() throws FileNotFoundException{
+    public Gameplay() throws FileNotFoundException {
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
+        this.delay = 2;
         timer = new javax.swing.Timer(delay, this);
         timer.start();
-        System.out.println("Gameplay initialized");
 
+        play = false;
+        gameOver = false;
+        lettersCorrect = 0;
+        lettersIncorrect = 0;
+        lettersTyped = "";
         quotes = new Quotes();
         text = new TextBlockGenerator(quotes.next());
         car = new Car(100, text.getLength());
+        setTimers();
 
     }
 
@@ -166,18 +142,17 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         if (gameOver) {
             gameOver = false;
-            secondsTimer.cancel();
-            wpmTimer.cancel();
             secondsElapsed = lettersIncorrect = lettersCorrect = 0;
             millisElapsed = 0;
-            level++;
             lettersTyped = "";
             text = new TextBlockGenerator(quotes.next());
             car = new Car(100, text.getLength());
 
         }
         play = true;
-        newGame = true;
+        secondsTimer.cancel();
+        wpmTimer.cancel();
+        setTimers();
         secondsTimer.scheduleAtFixedRate(task, 0, 1000);
         wpmTimer.scheduleAtFixedRate(task_wpm, 0, 1);
     }
@@ -201,5 +176,30 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             System.out.println("incorrect");
             lettersIncorrect++;
         }
+    }
+
+    private void setTimers() {
+        this.secondsElapsed = 0;
+        this.millisElapsed = 0;
+
+        this.secondsTimer = new java.util.Timer();
+        task = new java.util.TimerTask() {
+            @Override
+            public void run() {
+                secondsElapsed++;
+            }
+        };
+
+        this.wpmTimer = new java.util.Timer();
+        task_wpm = new java.util.TimerTask() {
+            @Override
+            public void run() {
+                millisElapsed++;
+                cpm = (int) (((double) lettersCorrect / millisElapsed) * 60000);
+                wpm = (int) (((double) lettersCorrect / millisElapsed) * 60000 / 5);
+            }
+        };
+
+
     }
 }
